@@ -1,0 +1,62 @@
+generator client {
+    provider = "prisma-client-js"
+}
+
+datasource db {
+    provider = "mysql"
+    url      = env("DATABASE_URL")
+}
+
+model User {
+    id       String @id @default(uuid())
+    email    String @unique
+    password String
+
+    createdAt DateTime @default(now())
+    updatedAt DateTime @default(now())
+}
+
+model Category {
+    id       String    @id @default(uuid())
+    name     String    @unique
+    services Service[]
+
+    createdAt DateTime @default(now())
+    updatedAt DateTime @default(now())
+}
+
+enum ServiceType {
+    Normal
+    VIP
+}
+
+model Service {
+    id          String      @id @default(uuid())
+    categoryId  String?
+    category    Category?   @relation(fields: [categoryId], references: [id])
+    serviceName String
+    type        ServiceType @default(Normal)
+
+    prices ServicePrice[]
+
+    createdAt DateTime @default(now())
+    updatedAt DateTime @default(now())
+}
+
+model ServicePrice {
+    id        String    @id @default(uuid())
+    serviceId String
+    service   Service   @relation(fields: [serviceId], references: [id], onDelete: Cascade)
+    duration  Int
+    price     Int
+    type      PriceType @default(Monthly)
+
+    createdAt DateTime @default(now())
+    updatedAt DateTime @default(now())
+}
+
+enum PriceType {
+    Hourly
+    Weekly
+    Monthly
+}
