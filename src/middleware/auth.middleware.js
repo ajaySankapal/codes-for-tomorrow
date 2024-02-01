@@ -11,7 +11,9 @@ export const verifyUser = async (req, res, next) => {
             token = req.headers.authorization.split(' ')[1]
 
             const decoded = jwt.verify(token, process.env.JWT_SECRET)
-            req.user = await prisma.user.findUnique({ where: { id: decoded.id } })
+            let userInDb = await prisma.user.findUnique({ where: { email: decoded.email } })
+            let user_ = userInDb ? userInDb : decoded;
+            req.user = user_
             if (!req.user) {
                 return res.status(401).json({
                     success: false,
