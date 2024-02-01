@@ -40,5 +40,5 @@ npm run start
 
 ### postman collection can be viewed here
 
-[Postman Collection](https://documenter.getpostman.com/view/19992161/2s9Yyti2Mo#612381f5-88e0-4e30-9c8a-bae213ac82f5)
+[Postman Collection](https://documenter.getpostman.com/view/19992161/2s9Yyti2Mo#612381f5-88e0-4e30-9c8a-bae213ac82f5)\
 https://documenter.getpostman.com/view/19992161/2s9Yyti2Mo#612381f5-88e0-4e30-9c8a-bae213ac82f5
